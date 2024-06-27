@@ -1,0 +1,35 @@
+{% extends 'main/index.html' %}
+
+{% block title %}
+Posts
+{% endblock title %}
+
+{% block content %}
+
+{% if post %}
+    <table>
+        <tr>
+            <td>Автор</td>
+            <td>Ссылка</td>
+            <td>Токен</td>
+        </tr>
+        
+        {% for post in post %}
+            {% if post.author == request.user %}
+                <tr>
+                    <td>{{ post.author }}</td>
+                    <td><a href="{{ post.link }}" target="_blank">{{ post.link }}</a></td>
+                    <td>{{ post.token }}</td>
+                    <td><button><a href="detail/{{ post.id }}">Посмотреть статистику</a></button></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <button><a href="create/">Создать пост</a></button>
+
+{% else %}
+    <h2>У вас нет постов.</h2>
+    <button><a href="create/">Создать пост</a></button>
+{% endif %}
+    
+{% endblock content %}
